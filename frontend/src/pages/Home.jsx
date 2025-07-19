@@ -48,8 +48,10 @@ const Home = () => {
         {stations.map((station, index)=>(
           <ParkingCard 
           key={index}
+          id={station.id}
           name={station.name}
           address = {station.address}
+          amount ={station.amount}
           />
         ))
       }
