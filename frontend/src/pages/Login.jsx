@@ -23,7 +23,7 @@ const Login = () => {
         }
       })
       if(user.data.message === "User found") {
-        navigate('/home');
+        navigate('/home',{state:{username: formdata.username}});
       }
        else if(user.data.message === "Incorrect Password") {
         alert("Invalid password");

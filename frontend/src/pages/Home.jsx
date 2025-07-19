@@ -3,9 +3,8 @@ import Navbar from '../components/Navbar'
 import axios from 'axios'
 import {Search} from 'lucide-react'
 import ParkingCard from '../components/ParkingCard';
-import SlotButton from '../components/slotButton';
 
-const Home = () => {
+const Home = ({username}) => {
 
     const [search, setsearch] = useState("");
     const [stations, setstations] = useState([]);
@@ -53,11 +52,11 @@ const Home = () => {
           name={station.name}
           address = {station.address}
           amount ={station.amount}
+          username={username}
           />
         ))
       }
       </div>
-      <SlotButton /> 
     </div>
   )
 }

@@ -32,7 +32,7 @@ const Signup = () => {
         alert("User already exists");
       }
       console.log("user created successfully");
-      navigate('/home')
+      navigate('/home',{state:{username:formdata.username}})
     }
     catch(err){
       console.error("Error in creating user", err);

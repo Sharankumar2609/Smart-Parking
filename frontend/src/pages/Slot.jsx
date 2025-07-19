@@ -29,24 +29,23 @@ const Slot = () => {
   return (
     <>
     <div className="h-screen flex flex-col">
-      <div className ="w-full bg-black h-30 flex flex-col justify-center items-center">
+      <div className ="w-full bg-black h-30 flex flex-col justify-center items-center mb-20">
           <h1 className="font-bold text-white text-3xl">{name || "No station found"}</h1>
-          <h1 className="font-semibold text-white text-2xl mt-2"> {address}</h1>
+          <h1 className="font-semibold text-white text-xl mt-2"> {address}</h1>
           <h1 className="text-white mt-2">(select your slot)</h1>
       </div>
-      <div className="flex justify-center items-center flex-grow">
-        <button className="hover:cursor-pointer">
-          <div className="grid grid-cols-5 gap-x-3 gap-y-3">
-            {slots.map((slot)=>(
-            <SlotButton
-            key={slot.id}
-            label={slot.slotLabel}
-            available={slot.is_available}
-            amount={String(amount)}
-            />
-          ))}
-          </div>
-        </button>
+      <div className="flex justify-center items-center flex-grow pb-20">
+        <div className="grid grid-cols-10 gap-x-3 gap-y-3">
+          {slots.map((slot)=>(
+          <SlotButton
+          key={slot.id}
+          name={name}
+          label={slot.slotLabel}
+          available={slot.is_available}
+          amount={String(amount)}
+          />
+        ))}
+        </div>
       </div>
     </div>
     </>
