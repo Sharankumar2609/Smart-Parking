@@ -53,7 +53,7 @@ const Signup = () => {
       </div>
       <div>
         <h3 className='text-white'>Email</h3>
-        <input type= "text" required placeholder="abc@gmail.com" name="email" value={formdata.email} onChange={handleChange} className="w-80 pt-3 pb-3 pl-2 mt-2 mb-2 border-none bg-white focus:outline-none focus:border-transparent rounded-md hover:scale-105 transition-transform duration-200 hover:border-blue-500"/>
+        <input type= "email" required placeholder="abc@gmail.com" name="email" value={formdata.email} onChange={handleChange} className="w-80 pt-3 pb-3 pl-2 mt-2 mb-2 border-none bg-white focus:outline-none focus:border-transparent rounded-md hover:scale-105 transition-transform duration-200 hover:border-blue-500"/>
       </div>
       <div>
         <h3 className='text-white'>Password</h3>
