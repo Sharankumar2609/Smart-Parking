@@ -31,6 +31,7 @@ model ParkingStation {
   latitude   Float
   longitude  Float
   totalSlots Int
+  amount     Float
   created_at DateTime      @default(now())
   slots      ParkingSlot[]
 }

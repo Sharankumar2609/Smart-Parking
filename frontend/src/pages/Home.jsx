@@ -23,7 +23,7 @@ const Home = () => {
         setstations(data.data)
       }
       catch(err){
-        console.log("Error infetching the stations")
+        console.log("Error in fetching the stations")
       }
     }
     fetchStations();

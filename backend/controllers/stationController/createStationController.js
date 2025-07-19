@@ -3,7 +3,7 @@ import {PrismaClient} from '@prisma/client'
 const prisma = new PrismaClient();
 
 export const createStation = async(req , res)=>{
-    const {name, address, latitude, longitude, totalSlots} = req.body;
+    const {name, address, latitude, longitude, totalSlots, amount} = req.body;
 
     try{
 
@@ -21,7 +21,8 @@ export const createStation = async(req , res)=>{
                 address,
                 latitude,
                 longitude,
-                totalSlots
+                totalSlots,
+                amount
             }
         })
         
