@@ -40,6 +40,6 @@ model ParkingSlot {
   id               Int             @id @default(autoincrement())
   parkingStationId Int
   is_available     Boolean
-  slotLable        String
+  slotLabel        String
   parking_station  ParkingStation? @relation(fields: [parkingStationId], references: [id])
 }

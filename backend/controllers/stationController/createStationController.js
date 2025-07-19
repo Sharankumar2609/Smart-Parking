@@ -29,7 +29,7 @@ export const createStation = async(req , res)=>{
         const slot = Array.from({length: totalSlots}).map((_, i)=>({
             parkingStationId:station.id,
             is_available:true,
-            slotLable:`A${i+1}`
+            slotLabel:`A${i+1}`
         }))
         
         const parkingSlots = await prisma.parkingSlot.createMany({

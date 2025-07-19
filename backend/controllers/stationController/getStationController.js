@@ -11,7 +11,7 @@ export const getStationDetails = async(req, res)=>{
             }
         })
         console.log("Station detials fetched successfully")
-        return res.status(200).send({message:"Station details fetched successfully",station})
+        return res.status(200).json(station)
     }
     catch(err){
         console.log("Error in fetching the station details",err);
