@@ -1,15 +1,33 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
+import axios from 'axios'
 import {Search} from 'lucide-react'
 import ParkingCard from '../components/ParkingCard';
 
 const Home = () => {
 
     const [search, setsearch] = useState("");
+    const [stations, setstations] = useState([]);
 
     const handleSearch = (e)=>{
       setsearch(e.target.value);
     }
+
+    useEffect(()=>{
+      async function fetchStations(){
+      try{
+        const data = await axios.get("http://localhost:3000/api/getAllStations")
+        if(!data.data){
+          console.log("No stations found")
+        }
+        setstations(data.data)
+      }
+      catch(err){
+        console.log("Error infetching the stations")
+      }
+    }
+    fetchStations();
+    },[])
   return (
     <div>
       <div className="flex-col bg-slate-900 pb-10 ">
@@ -26,7 +44,16 @@ const Home = () => {
       <div className="ml-15 mt-5 mb-5">
         <h1 className="font-semi-bold text-3xl "> All Stations</h1>
       </div>
-      <ParkingCard />
+      <div className="grid grid-cols-3 justify-items-center gap-5 gap-y-10 mb-5">
+        {stations.map((station, index)=>(
+          <ParkingCard 
+          key={index}
+          name={station.name}
+          address = {station.address}
+          />
+        ))
+      }
+      </div>
     </div>
   )
 }
