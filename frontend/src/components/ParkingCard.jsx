@@ -13,7 +13,6 @@ const ParkingCard = ({id, name, address, amount, username}) => {
         else{
             setLike(true)
         }
-
     }
     const handleSubmit = ()=>{
         navigate('/slot', {state:{id, name, address, amount}})
