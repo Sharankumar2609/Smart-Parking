@@ -20,19 +20,45 @@ const Signup = () => {
   }
 
   const handleSubmit = async(req, res) =>{
+
+    const { username, email, password, mobile, vehicle_no } = formdata;
+    
+    if (!username || !email || !password || !mobile || !vehicle_no) {
+      alert("Please fill in all the fields.");
+      return;
+    }
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{6,10}$/;
+    if (!passwordRegex.test(password)) {
+      alert("Password must be 6–10 characters and include at least:\n- One uppercase letter\n- One lowercase letter\n- One number\n- One special character");
+      return;
+    }
+    if (!/^\d{10}$/.test(mobile)) {
+      alert("Mobile number must be 10 digits.");
+      return;
+    }
+    const vehicleRegex = /^[A-Z]{2}-\d{2}-[A-Z]{1,2}-\d{4}$/i;
+    if (!vehicleRegex.test(vehicle_no)) {
+      alert("Vehicle number format is invalid. Use format like TN-01-AB-1234.");
+      return;
+    }
+
     try{
-      const user = await axios.post("http://localhost:3000/auth/createUser",{
+      const res = await axios.post("http://localhost:3000/auth/createUser",{
         username: formdata.username,
         email:formdata.email,
         password:formdata.password,
         mobile:formdata.mobile,
         vehicle_number: formdata.vehicle_no
       })
-      if(user.data.message === "User already exists"){
+
+      const {message, user} = res.data
+      if(message == "User already exists"){
         alert("User already exists");
       }
-      console.log("user created successfully");
-      navigate('/home',{state:{username:formdata.username}})
+      else if(message == "User created successfully"){
+        navigate('/home',{state:{user}})
+        console.log("user created successfully");
+      }
     }
     catch(err){
       console.error("Error in creating user", err);

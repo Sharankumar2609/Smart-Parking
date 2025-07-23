@@ -3,16 +3,19 @@ import axios from 'axios'
 import { useState } from 'react'
 import SlotButton from '../components/slotButton'
 import { useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 
 const Slot = () => {
+
+  const navigate = useNavigate()
   const location = useLocation()
   const [selectedSlots, setSelectedSlots] = useState([])
   const [cost, setCost] = useState(0)
-  const [time, setTime] = useState(0)
+  const [time, setTime] = useState(1)
   const state = location.state || {}
-  const {id, name, address, amount} = state
+  const {id, name, address, amount, veh_no} = state
   const [slots,setSlots] = useState([])
   const timeOptions = [1, 2, 4, 6, 8, 12, 24];
 
@@ -51,10 +54,14 @@ const Slot = () => {
   });
 }
 
-useEffect(()=>{
-  const tot = Number(time)*Number(amount)*selectedSlots.length
-  setCost(tot)
-},[time, selectedSlots])
+  useEffect(()=>{
+    const tot = Number(time)*Number(amount)*selectedSlots.length
+    setCost(tot)
+  },[time, selectedSlots])
+  
+  const handleBook = ()=>{
+    navigate('/booking',{state:{time, name, slot: selectedSlots, veh_no }})
+  }
 
 
   return (
@@ -99,7 +106,7 @@ useEffect(()=>{
           <h3 className="text-xl font-semibold">{selectedSlots.length==0 ? "-" : selectedSlots.map((prev,index) => (<span key={prev}>{prev} {index < selectedSlots.length - 1 ? ', ' : ''}</span>))}</h3>
         </div>
         <h1 className="text-xl font-semibold" >Cost : {cost}</h1>
-        <button className="px-4 py-3 rounded-md bg-red-400 mt-3 hover:scale-105 cursor-pointer">Book now</button>
+        <button className="px-4 py-3 rounded-md bg-red-400 mt-3 hover:scale-105 cursor-pointer" onClick={handleBook}>Book now</button>
         </div>
       </div>
       <div className="fixed bottom-0 w-full flex items-center justify-center gap-6 bg-gray-100 p-4 text-black text-sm ">

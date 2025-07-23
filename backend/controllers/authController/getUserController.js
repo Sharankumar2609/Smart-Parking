@@ -20,10 +20,10 @@ export const GetUser = async(req, res)=>{
         }
         const match = await bcrypt.compare(password, user.password)
         if(match){
-            return res.status(200).send({message:"User found"});
+            return res.status(200).json({message:"User found" ,user});
         }
         if(!match){
-            return res.status(200).send({message:"Incorrect Password"})
+            return res.status(200).json({message:"Incorrect Password"})
         }
     }
     catch(err){

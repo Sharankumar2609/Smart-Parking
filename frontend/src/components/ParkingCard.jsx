@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
-const ParkingCard = ({id, name, address, amount, username}) => {
+const ParkingCard = ({id, name, address, amount, username, veh_no}) => {
     const navigate = useNavigate();
     const [like, setLike] = useState(false)
     const handleLike = ()=>{
@@ -15,7 +15,7 @@ const ParkingCard = ({id, name, address, amount, username}) => {
         }
     }
     const handleSubmit = ()=>{
-        navigate('/slot', {state:{id, name, address, amount}})
+        navigate('/slot', {state:{id, name, address, amount, veh_no}})
     }
 
   return (

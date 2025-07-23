@@ -22,7 +22,7 @@ export const CreateUser = async (req, res) => {
 
     if (existingUser) {
       console.log('User already exists:', existingUser);
-      return res.status(400).json({ error: 'User already exists' });
+      return res.status(400).json({ message: 'User already exists' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -38,7 +38,7 @@ export const CreateUser = async (req, res) => {
     });
 
     console.log('User created successfully:', user);
-    return res.status(200).send({ message: 'User created successfully' });
+    return res.status(200).send({ message: 'User created successfully',user });
   } catch (err) {
     console.error('User not created:', err);
     return res.status(500).send({ error: 'User not created' });

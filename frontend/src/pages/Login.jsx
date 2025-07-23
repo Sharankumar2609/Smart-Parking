@@ -16,16 +16,18 @@ const Login = () => {
 
   const handleSubmit = async(req,res) =>{
     try{
-      const user = await axios.get("http://localhost:3000/auth/getUser",{
+      const res = await axios.get("http://localhost:3000/auth/getUser",{
         params:{
           username:formdata.username,
           password:formdata.password
         }
       })
-      if(user.data.message === "User found") {
-        navigate('/home',{state:{username: formdata.username}});
+      const { message, user } = res.data;
+
+      if(message === "User found") {
+        navigate('/home',{ state: { user: userData } });
       }
-       else if(user.data.message === "Incorrect Password") {
+       else if(message === "Incorrect Password") {
         alert("Invalid password");
       } 
       else{
@@ -38,7 +40,7 @@ const Login = () => {
   }
   return (
     <div className="bg-cover h-screen w-full flex justify-center items-center" style={{backgroundImage: `url(${parking_bg_img})`}}>
-        <div className="rounded-lg backdrop-blur-lg px-10 pb-5">
+        <div className="rounded-lg backdrop-blur-lg sm:px-7 lg:px-10 pb-5">
             <h2 className="text-center font-bold text-2xl mt-3 mb-3 text-white">Login</h2>
             <h4 className ="text-white">UserName</h4>
             <input type="text" name="username" placeholder="username" value = {formdata.username} onChange={handleChange}className="w-80 bg-white border-1 rounded-lg focus:outline-none focus:border-transparent pl-3 py-3 mt-2 mb-4"/>
@@ -57,3 +59,7 @@ const Login = () => {
 }
 
 export default Login
+
+
+
+
